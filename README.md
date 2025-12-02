@@ -49,7 +49,7 @@ This project transforms the original Iris flower classifier into an advanced dia
 ![Images](src/screenshots/S01.png)
 
 ### 3. Application Landing Page
-![Landing](src/screenshots/S1.png)
+![Landing](src/screenshots/S2.png)
 
 ### 4. Input Form - Test Case 1
 ![Form 1](src/screenshots/T1.png)
