@@ -64,11 +64,11 @@ This project transforms the original Iris flower classifier into an advanced dia
 *49.2% risk with health recommendations*
 
 ### 6. Input Form - Test Case 2
-![Form 2](src/screenshots/S4.png)
+![Form 2](src/screenshots/S5.png)
 *Patient: Anice, Age 50, High risk profile*
 
 ### 7. Result with Risk Factors
-![Result 2](src/screenshots/S5.png)
+![Result 2](src/screenshots/S6.png)
 *55.2% risk with identified risk factors*
 
 ---
