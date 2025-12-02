@@ -43,7 +43,7 @@ This project transforms the original Iris flower classifier into an advanced dia
 ## System Screenshots
 
 ### 1. Docker Build & Container Startup
-![Docker Run](screenshots/S0.png)
+![Docker Run](Lab2/src/screenshots/S0.png)
 *Container successfully started with Random Forest model (75.32% accuracy)*
 
 ### 2. Docker Images List
