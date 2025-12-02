@@ -2,7 +2,7 @@
 
 ### Diabetes Risk Prediction System 
 
-**Student:** Novia Dsilva | **MLOps Class of 2025**
+**Student:** Novia Dsilva 
 
 ---
 
@@ -43,31 +43,31 @@ This project transforms the original Iris flower classifier into an advanced dia
 ## System Screenshots
 
 ### 1. Docker Build & Container Startup
-![Docker Run](screenshots/S0.png)
+![Docker Run](src/screenshots/S0.png)
 *Container successfully started with Random Forest model (75.32% accuracy)*
 
 ### 2. Docker Images List
-![Images](screenshots/S01.png)
+![Images](src/screenshots/S01.png)
 *diabetes-prediction image created (3.51GB)*
 
 ### 3. Application Landing Page
-![Landing](screenshots/S1.png)
+![Landing](src/screenshots/S1.png)
 *Professional interface with ML badges*
 
 ### 4. Input Form - Test Case 1
-![Form 1](screenshots/S2.png)
+![Form 1](src/screenshots/S2.png)
 *Patient: Novia Dsilva, Age 40, Moderate risk profile*
 
 ### 5. Result - Moderate Risk (49.2%)
-![Result 1](screenshots/S3.png)
+![Result 1](src/screenshots/S3.png)
 *49.2% risk with health recommendations*
 
 ### 6. Input Form - Test Case 2
-![Form 2](screenshots/S4.png)
+![Form 2](src/screenshots/S4.png)
 *Patient: Anice, Age 50, High risk profile*
 
 ### 7. Result with Risk Factors
-![Result 2](screenshots/S5.png)
+![Result 2](src/screenshots/S5.png)
 *55.2% risk with identified risk factors*
 
 ---
