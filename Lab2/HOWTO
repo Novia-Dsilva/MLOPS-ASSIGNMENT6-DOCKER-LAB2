@@ -1,0 +1,2 @@
+docker build -t diabetes-prediction .
+docker run -p 80:4000 diabetes-prediction

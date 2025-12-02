@@ -1,0 +1,890 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Risk Assessment - AI Health Screening</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated background particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 15s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header-icon {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .header h1 {
+            font-size: 2.8em;
+            margin-bottom: 12px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+            margin-bottom: 15px;
+        }
+
+        .badges {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 18px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95em;
+        }
+
+        /* Main Card */
+        .card {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 20px;
+            padding: 35px 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card h2 {
+            color: #667eea;
+            margin-bottom: 25px;
+            font-size: 1.8em;
+            text-align: center;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        /* Info Box */
+        .info-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 25px rgba(245, 87, 108, 0.3);
+        }
+
+        .info-box h3 {
+            font-size: 1.15em;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-box p {
+            font-size: 0.95em;
+            opacity: 0.95;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-number {
+            font-size: 1.6em;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .stat-label {
+            font-size: 0.85em;
+            opacity: 0.9;
+        }
+
+        /* Compact Form Layout */
+        .form-section {
+            margin-bottom: 25px;
+        }
+
+        .form-section-title {
+            color: #667eea;
+            font-size: 1.15em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group.span-2 {
+            grid-column: span 2;
+        }
+
+        .form-group label {
+            display: block;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 6px;
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .form-group label i {
+            color: #667eea;
+            font-size: 1em;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 0.95em;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .helper-text {
+            font-size: 0.75em;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        /* Button */
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 35px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn i {
+            margin: 0 8px;
+        }
+
+        /* Loading */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .spinner-container {
+            position: relative;
+            margin: 0 auto 25px;
+            width: 80px;
+            height: 80px;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            animation: spin 1s linear infinite;
+        }
+
+        .spinner-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2em;
+            color: #667eea;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading h3 {
+            color: #667eea;
+            font-size: 1.3em;
+            margin-bottom: 8px;
+        }
+
+        .loading p {
+            color: #666;
+            font-size: 1em;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 15px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            animation: progress 2s ease-in-out infinite;
+        }
+
+        @keyframes progress {
+            0% { width: 0%; }
+            50% { width: 100%; }
+            100% { width: 0%; }
+        }
+
+        /* Results */
+        .result-container {
+            display: none;
+            animation: fadeInUp 0.8s ease-out;
+            margin-top: 30px;
+        }
+
+        .result-card {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .patient-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .patient-header h3 {
+            font-size: 2.2em;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .patient-header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .risk-result {
+            text-align: center;
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .risk-result::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .risk-result.low {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            box-shadow: 0 15px 40px rgba(17, 153, 142, 0.4);
+        }
+
+        .risk-result.moderate {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            box-shadow: 0 15px 40px rgba(245, 87, 108, 0.4);
+        }
+
+        .risk-result.high {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+            box-shadow: 0 15px 40px rgba(250, 112, 154, 0.4);
+        }
+
+        .risk-result h2 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .risk-percentage {
+            font-size: 4em;
+            font-weight: bold;
+            margin: 20px 0;
+            position: relative;
+            z-index: 1;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+        }
+
+        .risk-result p {
+            font-size: 1.2em;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+            line-height: 1.6;
+        }
+
+        .info-section {
+            margin: 30px 0;
+        }
+
+        .info-section h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+        }
+
+        .info-list {
+            list-style: none;
+        }
+
+        .info-list li {
+            background: #f8f9fa;
+            padding: 15px 18px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            font-size: 1em;
+            color: #333;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-list li:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .info-list li i {
+            color: #667eea;
+            font-size: 1.1em;
+        }
+
+        .risk-factors li {
+            border-left-color: #f5576c;
+            background: #fff3cd;
+        }
+
+        .risk-factors li i {
+            color: #f5576c;
+        }
+
+        .recommendations li {
+            border-left-color: #38ef7d;
+            background: #d1ecf1;
+        }
+
+        .recommendations li i {
+            color: #11998e;
+        }
+
+        .disclaimer {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffe8a1 100%);
+            border: 3px solid #ffc107;
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(255, 193, 7, 0.2);
+        }
+
+        .disclaimer strong {
+            color: #856404;
+            display: block;
+            margin-bottom: 12px;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .disclaimer p {
+            color: #856404;
+            font-size: 0.95em;
+            line-height: 1.7;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-group.span-2 {
+                grid-column: span 1;
+            }
+            
+            .header h1 {
+                font-size: 2.2em;
+            }
+            
+            .risk-percentage {
+                font-size: 3em;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 25px;
+            }
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-icon">
+                <i class="fas fa-heartbeat"></i>
+            </div>
+            <h1>🏥 Diabetes Risk Assessment</h1>
+            <p>Advanced AI-Powered Health Screening System</p>
+            <div class="badges">
+                <span class="badge"><i class="fas fa-robot"></i> Machine Learning</span>
+                <span class="badge"><i class="fas fa-database"></i> 768 Patient Cases</span>
+                <span class="badge"><i class="fas fa-check-circle"></i> Clinically Validated</span>
+            </div>
+        </div>
+
+        <!-- Main Form Card -->
+        <div class="card">
+            <h2>
+                <i class="fas fa-clipboard-list"></i>
+                Enter Your Health Information
+            </h2>
+            
+            <div class="info-box">
+                <h3><i class="fas fa-info-circle"></i> Quick & Confidential</h3>
+                <p>Your information is processed securely and never stored. Get instant, private results in under 2 seconds.</p>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">5</span>
+                        <span class="stat-label">AI Models</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">~78%</span>
+                        <span class="stat-label">Accuracy</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">&lt;2s</span>
+                        <span class="stat-label">Results</span>
+                    </div>
+                </div>
+            </div>
+
+            <form id="predictionForm">
+                <!-- Personal Info -->
+                <div class="form-section">
+                    <div class="form-section-title">
+                        <i class="fas fa-user"></i>
+                        Personal Information
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group span-2">
+                            <label><i class="fas fa-id-card"></i> Your Full Name</label>
+                            <input type="text" id="patient_name" name="patient_name" placeholder="Enter your full name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fas fa-birthday-cake"></i> Age</label>
+                            <input type="number" id="age" name="age" step="1" min="1" max="120" placeholder="e.g., 35" required>
+                            <div class="helper-text">Years</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Clinical Measurements -->
+                <div class="form-section">
+                    <div class="form-section-title">
+                        <i class="fas fa-stethoscope"></i>
+                        Clinical Measurements
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label><i class="fas fa-tint"></i> Glucose</label>
+                            <input type="number" id="glucose" name="glucose" step="0.1" min="0" max="300" placeholder="120" required>
+                            <div class="helper-text">mg/dL (70-140)</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fas fa-heart"></i> BP</label>
+                            <input type="number" id="blood_pressure" name="blood_pressure" step="0.1" min="0" max="150" placeholder="80" required>
+                            <div class="helper-text">mm Hg (60-90)</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fas fa-weight"></i> BMI</label>
+                            <input type="number" id="bmi" name="bmi" step="0.1" min="0" max="70" placeholder="25.5" required>
+                            <div class="helper-text">kg/m² (18.5-24.9)</div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label><i class="fas fa-syringe"></i> Insulin</label>
+                            <input type="number" id="insulin" name="insulin" step="0.1" min="0" max="900" placeholder="80" required>
+                            <div class="helper-text">μU/mL (16-166)</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fas fa-ruler"></i> Skin</label>
+                            <input type="number" id="skin_thickness" name="skin_thickness" step="0.1" min="0" max="100" placeholder="20" required>
+                            <div class="helper-text">mm (triceps)</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fas fa-baby"></i> Pregnancies</label>
+                            <input type="number" id="pregnancies" name="pregnancies" step="1" min="0" max="20" value="0" required>
+                            <div class="helper-text">Women only</div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label><i class="fas fa-dna"></i> Family History Score</label>
+                            <input type="number" id="diabetes_pedigree" name="diabetes_pedigree" step="0.01" min="0" max="3" placeholder="0.5" required>
+                            <div class="helper-text">Pedigree function (0.08-2.5)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn">
+                    <i class="fas fa-microscope"></i> Analyze My Risk Now <i class="fas fa-arrow-right"></i>
+                </button>
+            </form>
+
+            <div class="loading">
+                <div class="spinner-container">
+                    <div class="spinner"></div>
+                    <div class="spinner-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                </div>
+                <h3>AI Analysis in Progress...</h3>
+                <p>Evaluating your health data with 5 machine learning models</p>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results -->
+        <div class="result-container">
+            <div class="result-card">
+                <div class="patient-header">
+                    <h3 id="patientName"></h3>
+                    <p><i class="fas fa-file-medical-alt"></i> Diabetes Risk Assessment Report</p>
+                </div>
+
+                <div id="riskResult" class="risk-result">
+                    <h2 id="riskLevel"></h2>
+                    <div class="risk-percentage" id="riskPercentage"></div>
+                    <p id="riskMessage"></p>
+                </div>
+
+                <div class="info-section" id="riskFactorsSection" style="display: none;">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Risk Factors Identified</h3>
+                    <ul class="info-list risk-factors" id="riskFactorsList"></ul>
+                </div>
+
+                <div class="info-section">
+                    <h3><i class="fas fa-notes-medical"></i> Health Recommendations</h3>
+                    <ul class="info-list recommendations" id="recommendationsList"></ul>
+                </div>
+
+                <div class="disclaimer">
+                    <strong><i class="fas fa-shield-virus"></i> Medical Disclaimer</strong>
+                    <p>This AI assessment is for informational purposes only and is NOT a substitute for professional medical diagnosis. Always consult with a qualified healthcare provider for medical advice and treatment.</p>
+                </div>
+
+                <button class="btn" onclick="location.reload()">
+                    <i class="fas fa-redo"></i> New Assessment
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Create particles
+        function createParticles() {
+            const particles = document.getElementById('particles');
+            for (let i = 0; i < 15; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.width = Math.random() * 40 + 15 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particles.appendChild(particle);
+            }
+        }
+        createParticles();
+
+        $(document).ready(function() {
+            $('#predictionForm').on('submit', function(event) {
+                event.preventDefault();
+                
+                $('.loading').fadeIn();
+                $('#predictionForm').hide();
+
+                var formData = {
+                    'patient_name': $('#patient_name').val(),
+                    'pregnancies': $('#pregnancies').val(),
+                    'glucose': $('#glucose').val(),
+                    'blood_pressure': $('#blood_pressure').val(),
+                    'skin_thickness': $('#skin_thickness').val(),
+                    'insulin': $('#insulin').val(),
+                    'bmi': $('#bmi').val(),
+                    'diabetes_pedigree': $('#diabetes_pedigree').val(),
+                    'age': $('#age').val()
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/predict',
+                    data: formData,
+                    dataType: 'json'
+                }).done(function(data) {
+                    displayResults(data);
+                    $('.loading').hide();
+                    $('.result-container').fadeIn();
+                    
+                    $('html, body').animate({
+                        scrollTop: $('.result-container').offset().top - 20
+                    }, 800);
+                }).fail(function(xhr) {
+                    $('.loading').hide();
+                    $('#predictionForm').show();
+                    alert('Error: ' + (xhr.responseJSON?.error || 'Could not process request. Please check inputs.'));
+                });
+            });
+        });
+
+        function displayResults(data) {
+            $('#patientName').text(data.patient_name);
+
+            var resultDiv = $('#riskResult');
+            resultDiv.removeClass('low moderate high').addClass(data.risk_category);
+            
+            $('#riskLevel').html('<i class="fas fa-heartbeat"></i> ' + data.risk_level + ' Risk');
+            $('#riskPercentage').text(data.risk_percentage + '%');
+            
+            var message = '';
+            if (data.risk_category === 'low') {
+                message = '✓ Great news! Your diabetes risk is low. Keep up the healthy lifestyle!';
+            } else if (data.risk_category === 'moderate') {
+                message = '⚠️ Moderate risk detected. Consult a healthcare provider for evaluation.';
+            } else {
+                message = '🚨 High risk detected. Please see a doctor as soon as possible.';
+            }
+            $('#riskMessage').text(message);
+
+            if (data.risk_factors && data.risk_factors.length > 0) {
+                var riskHtml = '';
+                data.risk_factors.forEach(function(factor) {
+                    riskHtml += '<li><i class="fas fa-exclamation-circle"></i> ' + factor + '</li>';
+                });
+                $('#riskFactorsList').html(riskHtml);
+                $('#riskFactorsSection').show();
+            } else {
+                $('#riskFactorsSection').hide();
+            }
+
+            var recHtml = '';
+            var icons = ['fa-check-circle', 'fa-heartbeat', 'fa-running', 'fa-utensils', 'fa-clinic-medical', 'fa-notes-medical'];
+            data.recommendations.forEach(function(rec, index) {
+                var icon = icons[index % icons.length];
+                recHtml += '<li><i class="fas ' + icon + '"></i> ' + rec + '</li>';
+            });
+            $('#recommendationsList').html(recHtml);
+        }
+    </script>
+</body>
+</html>

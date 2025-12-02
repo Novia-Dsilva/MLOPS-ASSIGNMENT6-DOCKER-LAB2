@@ -1,6 +1,4 @@
-# MLOPS-ASSIGNMENT6-DOCKER-LAB2
-
-### Diabetes Risk Prediction System 
+# Diabetes Risk Prediction System - Docker Lab Assignment
 
 **Student:** Novia Dsilva | **MLOps Class of 2025**
 
