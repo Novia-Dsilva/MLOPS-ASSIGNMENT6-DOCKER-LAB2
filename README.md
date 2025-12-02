@@ -44,19 +44,16 @@ This project transforms the original Iris flower classifier into an advanced dia
 
 ### 1. Docker Build & Container Startup
 ![Docker Run](src/screenshots/S0.png)
-![Docker Run](Lab2/src/screenshots/S0.png)
-*Container successfully started with Random Forest model (75.32% accuracy)*
 
 ### 2. Docker Images List
 ![Images](src/screenshots/S01.png)
-*diabetes-prediction image created (3.51GB)*
 
 ### 3. Application Landing Page
-![Landing](src/screenshots/S1.png)
+![Landing](src/screenshots/S2.png)
 *Professional interface with ML badges*
 
 ### 4. Input Form - Test Case 1
-![Form 1](src/screenshots/S2.png)
+![Form 1](src/screenshots/S1.png)
 *Patient: Novia Dsilva, Age 40, Moderate risk profile*
 
 ### 5. Result - Moderate Risk (49.2%)
