@@ -44,32 +44,36 @@ This project transforms the original Iris flower classifier into an advanced dia
 
 ### 1. Docker Build & Container Startup
 ![Docker Run](src/screenshots/S0.png)
-![Docker Run](Lab2/src/screenshots/S0.png)
-*Container successfully started with Random Forest model (75.32% accuracy)*
 
 ### 2. Docker Images List
 ![Images](src/screenshots/S01.png)
-*diabetes-prediction image created (3.51GB)*
 
 ### 3. Application Landing Page
 ![Landing](src/screenshots/S1.png)
-*Professional interface with ML badges*
 
 ### 4. Input Form - Test Case 1
-![Form 1](src/screenshots/S2.png)
-*Patient: Novia Dsilva, Age 40, Moderate risk profile*
+![Form 1](src/screenshots/T1.png)
+*Patient: Novia Dsilva, Low risk profile*
 
-### 5. Result - Moderate Risk (49.2%)
-![Result 1](src/screenshots/S3.png)
-*49.2% risk with health recommendations*
+### 5. Result - Low Risk
+![Result 1](src/screenshots/T12.png)
+*4.1% risk with health recommendations*
 
 ### 6. Input Form - Test Case 2
-![Form 2](src/screenshots/S4.png)
-*Patient: Anice, Age 50, High risk profile*
+![Form 2](src/screenshots/T2.png)
+*Patient: Marie, Age 42, Moderate Risk profile*
 
-### 7. Result with Risk Factors
-![Result 2](src/screenshots/S5.png)
-*55.2% risk with identified risk factors*
+### 7. Result - Moderate Risk
+![Result 1](src/screenshots/T22.png)
+*43.2% risk with health recommendations*
+
+### 6. Input Form - Test Case 3
+![Form 2](src/screenshots/T3.png)
+*Patient: Robert, Age 58, High Risk profile*
+
+### 7. Result - Moderate Risk
+![Result 1](src/screenshots/T33.png)
+*66.3% risk with health recommendations*
 
 ---
 
