@@ -49,24 +49,31 @@ This project transforms the original Iris flower classifier into an advanced dia
 ![Images](src/screenshots/S01.png)
 
 ### 3. Application Landing Page
-![Landing](src/screenshots/S2.png)
-*Professional interface with ML badges*
+![Landing](src/screenshots/S1.png)
 
 ### 4. Input Form - Test Case 1
-![Form 1](src/screenshots/S1.png)
-*Patient: Novia Dsilva, Age 40, Moderate risk profile*
+![Form 1](src/screenshots/T1.png)
+*Patient: Novia Dsilva, Low risk profile*
 
 ### 5. Result - Low Risk
 ![Result 1](src/screenshots/T12.png)
 *4.1% risk with health recommendations*
 
 ### 6. Input Form - Test Case 2
-![Form 2](src/screenshots/S5.png)
-*Patient: Anice, Age 50, High risk profile*
+![Form 2](src/screenshots/T2.png)
+*Patient: Marie, Age 42, Moderate Risk profile*
 
-### 7. Result with Risk Factors
-![Result 2](src/screenshots/S6.png)
-*55.2% risk with identified risk factors*
+### 7. Result - Moderate Risk
+![Result 1](src/screenshots/T22.png)
+*43.2% risk with health recommendations*
+
+### 6. Input Form - Test Case 3
+![Form 2](src/screenshots/T3.png)
+*Patient: Robert, Age 58, High Risk profile*
+
+### 7. Result - Moderate Risk
+![Result 1](src/screenshots/T33.png)
+*66.3% risk with health recommendations*
 
 ---
 
