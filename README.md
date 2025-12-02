@@ -36,7 +36,6 @@ This project transforms the original Iris flower classifier into an advanced dia
 | **Medical Context** | None | Clinical ranges + disclaimer |
 | **Personalization** | Generic | Patient-specific advice |
 
-**Total Enhancements:** 30+ modifications across ML, UI, architecture, and production features
 
 ---
 
